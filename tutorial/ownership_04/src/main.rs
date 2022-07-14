@@ -23,7 +23,7 @@ fn main() {
         let s1 = String::from("my strin");
         let s2 = s1; // after this assignment (copy pointer, capacity and length)
         //of s1 String(bc. this is on heap not stack)  RUST automat. free s1 
-        // these steps are called move (s1 moves to s2)
+        // these steps are called move (s1 moves to s2) so we transfer ownership
 
         //println!("this is s1 {}",s1); // gives us an error
         println!("this is s2 {}",s2);
@@ -41,7 +41,7 @@ fn main() {
     
     // ownership in functions
         
-    let s1 = String::from("mystring"); // bring s1 into scope
+    let s1 = String::from("mystring"); // bring s1 into ocope
     takes_ownership(s1); // s1 "moves" into the function
     // s1 is not valid here
 
@@ -119,7 +119,27 @@ fn main() {
         println!("r3 = {}",r3);
         println!("r3 = {}",r3);
     }
+    
+    // SLICE TYPE
+    // slice does not have have ownership
+    // string literals are immutable
+    {
+        let mut word = String::from("find word");
+        let first_word = find_word(&word);
+        word.clear();
+        println!("index at {}",word);
+    
+    } 
+    
+    // Slice is reference
+    {
+    let s = String::from("hello world");
+    
+    let hello = &s[0..5];
+    let world = &s[6..11];
+    println!("{} || {}",hello,world);
 
+    }    
     
 }
 
@@ -159,8 +179,24 @@ fn change(my_sting: &mut String) {
     my_sting.push_str("pridal som toto!");
 }
 
+//this is not valid -> reference to unspecified value (because 's' goes out of scope)
+//fn dangle_ref() -> &String{
+//    let s = String::from("lalal");
+//    &s
+//}
+//
 
-fn dangle_ref() -> &String{
-    let s = String::from("lalal");
-    &s
+
+
+
+fn find_word(word: &str) -> &str {
+    let word_as_bytes = word.as_bytes();
+    for (i,&item) in word_as_bytes.iter().enumerate() {
+        if item == b' '{
+            return &word[..i];
+        }
+    }
+
+   &word[..]
+    
 }
