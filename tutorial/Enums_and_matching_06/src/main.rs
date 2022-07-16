@@ -169,6 +169,40 @@ fn main() {
         _ => println!("Never mind u can try once again"),
     }
     println!("Ownership of my_number {}", my_number);
+
+    
+    // IF LET syntax
+
+    {
+        // this match here can be write using If let 
+        let config_max = Some(3u8);
+        match config_max {
+            Some(max) => println!("some value {}",max),
+            _ => (),
+        }
+
+        // rewrite match using IF lET
+        
+        let config_max = Some(3u8);
+        if let Some(max) = config_max {
+            println!("some value {}",max);
+        }
+
+        // using IF LET ELSE
+
+        let config_max: Option<u8> =  None;
+        if let Some(max) = config_max {
+            println!("Some value, not else {}",max);
+
+        }
+        else {
+            println!("Some value from else {:?}", config_max);
+        }
+        
+
+
+
+    }
     
 }
 
