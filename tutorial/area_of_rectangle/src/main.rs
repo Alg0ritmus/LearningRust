@@ -9,7 +9,9 @@ struct Rectangle {
 // assosiated functions are called by ::
 impl Rectangle {
     // create constructor using assosiated function
-    fn square(size: u32) -> Rectangle { // assosiated function (not nethode) 
+    fn square(size: u32) -> Rectangle { 
+        // assosiated function (not method,
+        // bc. &slef is not present) 
         Rectangle{
             width: size,
             height: size
