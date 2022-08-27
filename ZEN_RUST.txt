@@ -1,0 +1,99 @@
+####################################################
+#	 RUST - References & Borrowing Rules 	   #
+####################################################
+
+
+
+1) Each value in Rust has an owner.
+2) There can only be one owner at a time.
+3) When the owner goes out of scope, the value will be dropped.
+
+4) if you have a MUTABLE reference to a value, you can have no other
+references to that value !!!
+
+5) cannot have a MUTABLE reference while we have an IMMUTABLE one to the same
+value
+
+
+
+X) At any given time, you can have either one mutable reference or any number of
+immutable references.
+
+Y) References must always be valid.
+
+
+###################################################
+#	SLICES ARE JUST REFERENCE TO MEMORY	  #
+###################################################
+
+s = String:from("hello world");
+word = &s[6..];
+
+s: String			
++------+-------+		   +------+-------+	
+| name | value |	           | name | value |
++------+-------+	           +------+-------+
+| ptr  |   ====|==================>|   0  |   h	  |
++------+-------+	           +------+-------+
+| len  |   11  |	           |   1  |   e	  |
++------+-------+	           +------+-------+
+|cpcty |   11  |	           |   2  |   l   |
++------+-------+	           +------+-------+
+				   |   3  |   l   |
+                                   +------+-------+
+				   |   4  |   o   |
+                                   +------+-------+
+				   |   5  |       |
+word: &s[6..] ->slice              +------+-------+
++------+-------+         =========>|   6  |   w   |
+| name | value |         ||    	   +------+-------+
++------+-------+         ||	   |   7  |   o   |
+|  ptr |   ====|=========||        +------+-------+
++------+-------+		   |   8  |   r   |
+                                   +------+-------+
+				   |   9  |   l   |
+                                   +------+-------+
+				   |  10  |   d   |
+                                   +------+-------+
+
+
+
+
+
+
+
+
+
+###################################################
+#	WATCH OUT - there is also moving 	  #
+###################################################
+
+let x = 5;
+let y = x; // copy bcs. copy Trait
+
+
+let s1 = String::from("hello");
+let s2 = s1; // moving bcs. copy Trait is not impl. on String
+
+// s1 is not available here
+
+
+###################################################
+# 		Reference to String		  #			
+###################################################
+
+
+&String			String			String-acctual value	
++------+-------+	+------+-------+	+------+-------+	
+| name | value |        | name | value |        | name | value |
++------+-------+        +------+-------+        +------+-------+
+|  ptr |   ====|=====>  |  ptr |   ====|=====>  |  0   |   h   | 
++--------------+        +------+-------+        +------+-------+
+			| len  |   5   |	|  1   |   e   |
+			+------+-------+	+------+-------+
+			|cpcty |   5   |	|  2   |   l   |
+			+------+-------+	+------+-------+
+						|  3   |   l   |
+						+------+-------+
+						|  4   |   o   |
+						+------+-------+
