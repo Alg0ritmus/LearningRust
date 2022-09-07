@@ -1,0 +1,55 @@
+// select number of threads used while testing
+
+$ cargo test -- --test-threads=1
+
+// by default if fn that we test is printing smth, 
+// it prints msg only if test fail, but we can change
+// that behavior in console, so println! will be captured
+// even if test passes
+
+$ cargo test -- --show-output
+
+// running single test
+
+$ cargo test "testname"  // u can specify just substring and it will filter
+all matching tests
+
+// u can exclude time-consuming test from running like so:
+
+#[test]
+#[ignore]
+
+
+// running #[ignore] tests:
+
+$ cargo test -- --ignored
+
+// run all tests + ignored tests
+
+$ cargo test -- --include-ignored
+
+
+
+
+// run specific integration test
+
+$ cargo test --test "integration_test_filename"
+
+
+////////////////
+// Unit tests vs Integratiokn tests
+///////////////
+
+
+// UNIT TEST
+
+Unit tests exercise different parts of a library separately and can test
+private implementation details
+
+
+
+// INTEGRATION TEST
+
+Integration tests check that many parts of the library work together
+correctly, and they use the library’s public API to test the code in the same
+way external code will use it
