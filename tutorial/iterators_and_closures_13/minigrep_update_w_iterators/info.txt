@@ -1,0 +1,9 @@
+How to run program w system enviroment variables?
+
+NAME_OF_ENV_VAR=1 cargo run ...
+
+for our CLI minigrep we can use IGNORE_CASE env variable
+to turn on/off case-sensitive search:
+
+IGNORE_CASE=1 cargo run -- to poem.txt 
+
