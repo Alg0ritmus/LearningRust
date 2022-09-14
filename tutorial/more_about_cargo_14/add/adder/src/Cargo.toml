@@ -1,0 +1,2 @@
+[dependencies]
+add_one = { path = "../add_one"}

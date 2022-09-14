@@ -1,0 +1,15 @@
+# Here we can specify our workspace
+
+[workspace]
+members = [
+	"adder",
+	"add_one",
+	"add_two",
+]
+
+
+# adder -> main.rs
+# add_one -> lib.rs
+# add_two -> lib.rs
+
+
