@@ -74,8 +74,10 @@ impl Node {
             }
         }
 
+        // print number
         println!("{}",self.value);
 
+        // traverse all the way to right subtree
         match &self.right_child{
             Null => (),
             Next(a) => {
@@ -86,22 +88,76 @@ impl Node {
 
     }
   
+    fn preodrer_traverse(&self){
+   
+        // print number
+        println!("{}",self.value);
 
+        // traverse all the way to left subtree
+        match &self.left_child {
+            Null => (), 
+            Next(a) => {
+                a.borrow().preodrer_traverse()
+            }
+        }
+
+
+        // traverse all the way to right subtree
+        match &self.right_child{
+            Null => (),
+            Next(a) => {
+                a.borrow().preodrer_traverse()
+            }
+        }
+
+
+    }
+
+    fn postodrer_traverse(&self){
+    
+        // traverse all the way to left subtree
+        match &self.left_child {
+            Null => (), 
+            Next(a) => {
+                a.borrow().postodrer_traverse()
+            }
+        }
+
+
+
+        // traverse all the way to rigth subtree
+        match &self.right_child{
+            Null => (),
+            Next(a) => {
+                a.borrow().postodrer_traverse()
+            }
+        }
+        // print number
+        println!("{}",self.value);
+
+
+    }
     
 }
 
 fn main() {
 
-    let numbers = [15,10,4,12,22,18,24,50,35,31,44,70,66,90];
+    let numbers = [15,50,10,22,35,70,4,12,18,24,31,44,66,90];
     // ceate root node (needs to be mutable)
     let mut root = Node::new(25);
     for i in 0..numbers.len(){
         let x = Node::new(numbers[i]);
         root.insert(x);
     }
-    root.inodrer_traverse();
 
-    dbg!("from main a={:?}",root);
+    println!("inorder:");
+    root.inodrer_traverse();
+    println!("preorder:");
+    root.preodrer_traverse();
+    println!("postorder:");
+    root.postodrer_traverse();
+
+    //dbg!("from main a={:?}",root);
 
     /*
     let mut a = Node::new(1);
